@@ -1,0 +1,37 @@
+name: CI
+# 23  336
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: >-
+      ${{ matrix.os }} ${{ matrix.ruby }}
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-20.04, macos-10.15 ]
+        ruby: [ head ]
+
+    steps:
+      - name: repo checkout
+        uses: actions/checkout@v2
+
+      - name: load ruby, ragel
+        uses: MSP-Greg/setup-ruby-pkgs@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          apt-get: ragel
+          brew: ragel
+
+      - name:  bundle install
+        shell: pwsh
+        run:   bundle install --jobs 4 --retry 3
+
+      - name: compile
+        run:  bundle exec rake compile
+
+      - name: run
+        timeout-minutes: 5
+        run:  entrypoint.sh
