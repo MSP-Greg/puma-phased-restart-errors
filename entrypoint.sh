@@ -19,7 +19,8 @@ repeatedly_request_phased_restarts ()
 }
 
 random_string () {
-  LC_CTYPE=C tr -dc A-Za-z0-9 < /dev/random | head -c "$REQUEST_BODY_SIZE"
+  # LC_CTYPE=C tr -dc A-Za-z0-9 < /dev/urandom | head -c "$REQUEST_BODY_SIZE"
+  cat /dev/urandom | tr -dc A-Za-z0-9 | fold -w $REQUEST_BODY_SIZE | head -n 1
 }
 
 repeatedly_send_requests ()
