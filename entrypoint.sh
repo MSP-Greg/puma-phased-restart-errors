@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PUMA_MASTER_PIDFILE=puma.pid
+PUMA_MASTER_PIDFILE=./puma.pid
 REQUEST_BODY_SIZE=16384
 
 start_puma_master ()

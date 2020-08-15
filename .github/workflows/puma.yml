@@ -31,4 +31,4 @@ jobs:
 
       - name: run
         timeout-minutes: 5
-        run:  entrypoint.sh
+        run:  ./entrypoint.sh
