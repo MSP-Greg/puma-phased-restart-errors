@@ -14,12 +14,12 @@ repeatedly_request_phased_restarts ()
   while :
   do
     bundle exec pumactl -P "${PUMA_MASTER_PIDFILE}" phased-restart > /dev/null 2>&1 || exit
-    sleep 1
+    sleep 30
   done
 }
 
 random_string () {
-  LC_CTYPE=C tr -dc A-Za-z0-9 < /dev/urandom | head -c "$REQUEST_BODY_SIZE"
+  LC_CTYPE=C tr -dc A-Za-z0-9 < /dev/random | head -c "$REQUEST_BODY_SIZE"
 }
 
 repeatedly_send_requests ()
