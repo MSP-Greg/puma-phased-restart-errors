@@ -29,9 +29,6 @@ jobs:
         shell: pwsh
         run:   bundle install --jobs 4 --retry 3
 
-      - name: compile
-        run:  bundle exec rake compile
-
       - name: run
         timeout-minutes: 5
         run:  entrypoint.sh
